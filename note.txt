@@ -1,0 +1,4 @@
+> pip install fastapi, poetry, uvicorn
+> poetry init
+> poetry add uvicorn fastapi
+> uvicorn main:app --reload (if main.py exists)
