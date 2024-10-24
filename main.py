@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Path, Query
 from pydantic import BaseModel
 from typing import Optional, List
 
@@ -24,6 +24,16 @@ async def create_user(user: User):
     return "Success"
 
 
+# path params
+# query params
 @app.get("/users/{id}")
-async def get_user(id: int):
-    return users[id]
+async def get_user(
+    id: int = Path(..., description="The ID of the user you want to retrieve.,", gt=0),
+    q: str = Query(None, max_length=5)
+    ):
+    return { "user": users[id], "query": q }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="localhost", port=8000)
