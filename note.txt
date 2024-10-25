@@ -29,3 +29,7 @@ another fix: remove the role column, (alembic confuses the column name and the n
 to fix this, create the column first then add the column
 > alembic upgrade head
 > alembic downgrade base (the opposite of upgrade) (some seeded data were added from students.json)
+
+switching to postgresql:
+> psql -U postgres
+-- 1234
