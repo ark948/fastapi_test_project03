@@ -33,3 +33,21 @@ to fix this, create the column first then add the column
 switching to postgresql:
 > psql -U postgres
 -- 1234
+
+
+    op.add_column(
+        "users",
+        sa.Column(
+            "role", sa.Enum("teacher", "student", name="role"), nullable=True
+        ),
+    )
+
+
+    op.add_column(
+        "content_blocks",
+        sa.Column(
+            "type",
+            sa.Enum("lesson", "quiz", "assignment", name="contenttype"),
+            nullable=True,
+        ),
+    )

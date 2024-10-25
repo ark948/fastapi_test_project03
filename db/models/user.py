@@ -15,7 +15,7 @@ class User(Timestamp, Base):
 
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String(100), unique=True, index=True, nullable=False)
-    role = Column(Enum(Role))
+    role = Column(Enum(Role, name='role_types'))
     is_active = Column(Boolean, default=False)
     profile = relationship("Profile", back_populates="owner", uselist=False)
     student_courses = relationship("StudentCourse", back_populates="student")
