@@ -2,3 +2,30 @@
 > poetry init
 > poetry add uvicorn fastapi
 > uvicorn main:app --reload (if main.py exists)
+
+
+older fastapi docs recommend using sqlalchemy
+newer fastapi docs recommend a new ORM based on sqlalchemy and pydantic called SQLModel
+
+for now, i will use sqlalchemy + sqlite
+
+tutorial uses sqlalchemy + postgresql (postgresql+psycopg2) (psycopg2-binary)
+
+db> models> user.py : uselist is very important in sqlalchemy
+it indicates that this is not a one to many relationship
+
+new interesting package: sqlalchemy-utils
+> poetry add sqlalchemy-utils
+
+utcnow from datetime is deprecated
+
+> poetry add alembic
+-- add sqlalchemy connection url to alembic.ini
+-- update alembic/env.py to access models
+> alembic init alembic
+> alembic revision --autogenerate -m "summary"
+-- view the revision file, and fix the problems, (like adding sqlalchemy-utils)
+another fix: remove the role column, (alembic confuses the column name and the name of the enum, both are role)
+to fix this, create the column first then add the column
+> alembic upgrade head
+> alembic downgrade base (the opposite of upgrade) (some seeded data were added from students.json)
